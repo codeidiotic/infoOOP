@@ -139,11 +139,11 @@ function createDailyClicksChart(){
                     },
                     grid: {
                         display: true,
-                        color: "rgb(54, 162, 235, 0.25)"
+                        color: "rgb(54, 162, 235, 0.25)",
+                        borderColor: "transparent"
                     }
                 },
                 x:{
-                    borderColor: "transparent",
                     title: {
                         display: true,
                         text: 'Date',
@@ -157,7 +157,8 @@ function createDailyClicksChart(){
                         color: "rgb(54, 162, 235)"
                     },
                     grid: {
-                        display: false
+                        display: false,
+                        borderColor: "transparent",
                     }
                 }
             }
