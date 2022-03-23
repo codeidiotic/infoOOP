@@ -1,0 +1,84 @@
+:root{
+    /* --primary: #00afff; */
+    --primary: #ff0080;
+    --primary-light: rgb(255 0 128 / 20%);
+    --dark: #1b3c6e;
+    --dark-light: #cce0ff;
+    --purple: #bc2a8d;
+    --purple-light: rgb(121 40 202 / 20%);
+    --grey: #edf0f5;
+    --graph-blue: rgb(54, 162, 235);
+    --bs-body-color: #1b3c6e;
+    --font-small: 0.875rem;
+}
+
+body{
+    font-family: 'Source Sans Pro', sans-serif;
+    font-weight: 400;
+    background: var(--grey);
+}
+
+.bg-primary-light{
+    background: var(--primary-light);
+}
+
+.bg-purple-light{
+    background:  var(--purple-light);
+}
+
+.bg-dark-light{
+    background: var(--dark-light);
+}
+
+.fc-primary{
+    color: var(--primary);
+}
+
+.fc-purple{
+    color: var(--purple);
+}
+
+.fc-dark{
+    color: var(--dark);
+}
+
+.fs-small{
+    font-size: var(--font-small);
+}
+
+.fc-graph-blue{
+    color: var(--graph-blue);
+}
+
+.copy-link-input{
+    border: 0;
+    background: transparent;
+    width: 90%;
+    text-overflow: ellipsis;
+    cursor: pointer;
+    opacity: 0.65;
+    font-size: var(--font-small);
+}
+
+.copy-link-input:focus-visible{
+    outline: 0;
+}
+
+.nav-item .nav-link{
+    color: var(--dark);
+    opacity: 0.75;
+}
+
+.nav-item .nav-link.active{
+    color: var(--primary);
+    opacity: 1;
+}
+
+.icon-container{
+    width: 4rem;
+    height: 4rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 0.8rem;
+}
