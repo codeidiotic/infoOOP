@@ -71,7 +71,7 @@ function createMobileDevicesChart(){
         }
     };
 
-    const mobile_devices_chart = new Chart(document.getElementById("mobile-devices-chart"), config); 
+    return new Chart(document.getElementById("mobile-devices-chart"), config); 
 }
 
 function createRandomDataForDailyClicks(){
@@ -94,12 +94,13 @@ function createDailyClicksChart(){
     const data = {
         labels: dates_of_month,
         datasets: [{
+            label: "Clicks",
             data: daily_views,
             backgroundColor: "rgb(54, 162, 235, 0.2)",
             borderColor: "rgb(54, 162, 235)",
             borderWidth: 2,
             fill: true,
-            lineTension: 0.4
+            lineTension: 0.5
         }]
     };
     const config = {
@@ -110,9 +111,75 @@ function createDailyClicksChart(){
                 legend: {
                     display: false
                 }
+            },
+            scales: {
+                y:{
+                    borderColor: "transparent",
+                    title: {
+                        display: true,
+                        text: 'Clicks Count',
+                        font: {
+                            size: 12,
+                            weight: 500
+                        },
+                        color: "rgb(54, 162, 235)"
+                    },
+                    suggestedMin: 0,
+                    suggestedMax: 2000,
+                    ticks: {
+                        display: true,
+                        callback: function(value, index, ticks){
+                            return nFormatter(value, 2);
+                        },
+                        color: "rgb(54, 162, 235)",
+                        font: {
+                            size: 12
+                        },
+                        stepSize: 400
+                    },
+                    grid: {
+                        display: true,
+                        color: "rgb(54, 162, 235, 0.25)"
+                    }
+                },
+                x:{
+                    borderColor: "transparent",
+                    title: {
+                        display: true,
+                        text: 'Date',
+                        font: {
+                            size: 12,
+                            weight: 500
+                        },
+                        color: "rgb(54, 162, 235)"
+                    },
+                    ticks: {
+                        color: "rgb(54, 162, 235)"
+                    },
+                    grid: {
+                        display: false
+                    }
+                }
             }
         }
     };
 
     return new Chart(ctx, config);
+}
+
+function nFormatter(num, digits) {
+    const lookup = [
+      { value: 1, symbol: "" },
+      { value: 1e3, symbol: "k" },
+      { value: 1e6, symbol: "M" },
+      { value: 1e9, symbol: "G" },
+      { value: 1e12, symbol: "T" },
+      { value: 1e15, symbol: "P" },
+      { value: 1e18, symbol: "E" }
+    ];
+    const rx = /\.0+$|(\.[0-9]*[1-9])0+$/;
+    var item = lookup.slice().reverse().find(function(item) {
+      return num >= item.value;
+    });
+    return item ? (num / item.value).toFixed(digits).replace(rx, "$1") + item.symbol : "0";
 }
