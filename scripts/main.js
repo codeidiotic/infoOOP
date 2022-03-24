@@ -19,6 +19,9 @@ function copyText(inputElement){
     if(inputElement == "openonapp"){
         element = document.getElementById("openonapplink");
     }
+    else if(inputElement == "info"){
+        element = document.getElementById("infolink");
+    }
     else{
         element = document.getElementById("youtubelink");
     }
@@ -31,6 +34,9 @@ function openPage(inputElement){
     let element = '';
     if(inputElement == "openonapp"){
         element = document.getElementById("openonapplink");
+    }
+    else if(inputElement == "info"){
+        element = document.getElementById("infolink");
     }
     else{
         element = document.getElementById("youtubelink");
