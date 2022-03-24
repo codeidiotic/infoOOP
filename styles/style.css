@@ -82,3 +82,13 @@ body{
     align-items: center;
     border-radius: 0.8rem;
 }
+
+.thumbnail-picture{
+    width: 25%;
+}
+
+@media (max-width: 768px){
+    .thumbnail-picture{
+        width: 50%;
+    }
+}
