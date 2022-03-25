@@ -12,6 +12,8 @@ let daily_views = [];
 function pageLoad(){
     createMobileDevicesChart();
     createRandomDataForDailyClicks();
+    createStatesPieChart();
+    createCountriesBarChart();
 }
 
 function copyText(inputElement){
@@ -45,7 +47,6 @@ function openPage(inputElement){
 }
 
 function createMobileDevicesChart(){
-    document.getElementById("mobile-devices-chart");
     const data = {
         labels: [
             'Android',
@@ -86,8 +87,6 @@ function createRandomDataForDailyClicks(){
         daily_views.push(getRndInteger(200, 2000));
     }
 
-    console.log(dates_of_month);
-    console.log(daily_views);
     createDailyClicksChart();
 }
 
@@ -189,4 +188,139 @@ function nFormatter(num, digits) {
       return num >= item.value;
     });
     return item ? (num / item.value).toFixed(digits).replace(rx, "$1") + item.symbol : "0";
+}
+
+function createStatesPieChart(){
+    const data = {
+        labels: [
+            "Delhi/NCR",
+            "Rajasthan",
+            "Uttar Pradesh",
+            "West Bengal"
+        ],
+        datasets: [{
+            label: "Top States",
+            data: [ 764, 111, 173, 329 ],
+            backgroundColor: [
+                'rgb(255, 99, 132)',
+                'rgb(54, 162, 235)',
+                'rgb(255, 205, 86)',
+                '#bc2a8d'
+            ],
+            hoverOffset: 4
+        }]
+    }
+
+    const config = {
+        type: 'doughnut',
+        data: data,
+        options: {
+            plugins: {
+                legend: {
+                    display: false
+                }
+            },
+            cutout: "30%"
+        }
+    };
+
+    return new Chart(document.getElementById("states_chart_container"), config);
+}
+
+function createCountriesBarChart(){
+    const data = {
+        labels: [
+            "India",
+            "United States",
+            "Ireland",
+            "France",
+            "Germany"
+        ],
+        datasets: [{
+            label: "Traffic",
+            data: [ 1381, 436, 271, 133, 90 ],
+            borderColor: [
+                'rgb(255, 99, 132)',
+                'rgb(54, 162, 235)',
+                'rgb(255, 205, 86)',
+                'rgb(188, 42, 141)',
+                'rgb(64, 173, 168)'
+            ],
+            borderWidth: 1,
+            backgroundColor: [
+                'rgb(255, 99, 132, 0.5)',
+                'rgb(54, 162, 235, 0.5)',
+                'rgb(255, 205, 86, 0.5)',
+                'rgb(188, 42, 141, 0.5)',
+                'rgb(64, 173, 168, 0.5)'
+            ],
+            barPercentage: 0.2,
+            borderRadius: 5
+        }]
+    };
+
+    const config = {
+        type: "bar",
+        data: data,
+        options: {
+            plugins: {
+                legend: {
+                    display: false
+                }
+            },
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    title: {
+                        display: true,
+                        text: '# of Visitors',
+                        font: {
+                            size: 12,
+                            weight: 500
+                        },
+                        color: "rgb(54, 162, 235)"
+                    },
+                    ticks: {
+                        display: true,
+                        callback: function(value, index, ticks){
+                            return nFormatter(value, 2);
+                        },
+                        color: "rgb(54, 162, 235)",
+                        font: {
+                            size: 12
+                        },
+                        stepSize: 400
+                    },
+                    grid: {
+                        display: true,
+                        color: "rgb(54, 162, 235, 0.25)",
+                        borderColor: "transparent"
+                    }
+                },
+                x: {
+                    title: {
+                        display: true,
+                        text: 'Country',
+                        font: {
+                            size: 12,
+                            weight: 500
+                        },
+                        color: "rgb(54, 162, 235)"
+                    },
+                    ticks: {
+                        autoSkip: false,
+                        maxRotation: 0,
+                        minRotation: 0,
+                        color: "rgb(54, 162, 235)"
+                    },
+                    grid: {
+                        display: false,
+                        borderColor: "transparent",
+                    }
+                }
+            }
+        }
+    };
+
+    return new Chart(document.getElementById("countries_bar_graph"), config);
 }
