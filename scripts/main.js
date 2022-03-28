@@ -8,12 +8,15 @@
 document.addEventListener("DOMContentLoaded", pageLoad);
 let dates_of_month = [];
 let daily_views = [];
+let window_width = window.innerWidth;
+let window_height = window.innerHeight;
 
 function pageLoad(){
     createMobileDevicesChart();
     createRandomDataForDailyClicks();
     createStatesPieChart();
     createCountriesBarChart();
+    addResizeEvent();
 }
 
 function copyText(inputElement){
@@ -323,4 +326,14 @@ function createCountriesBarChart(){
     };
 
     return new Chart(document.getElementById("countries_bar_graph"), config);
+}
+
+function addResizeEvent(){
+    window.addEventListener("resize", (event) => {
+        if(Math.abs(event.target.innerWidth - window_width) >= 200){
+            console.log("if condition");
+            console.log("width gap: " + Math.abs(event.target.innerWidth - window_width));
+            window.location.reload();
+        }
+    })
 }
